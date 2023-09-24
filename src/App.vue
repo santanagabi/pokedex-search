@@ -4,14 +4,6 @@
     <button>Buscar Nome</button>
 
     <div>
-      <!-- <img src="" />
-
-      <div>
-        <p>Nome:</p>
-        <p>Tipo:</p>
-        <p>Experiência:</p>
-      </div> -->
-
       <ul>
         <li v-for="pokemon in getPokemons" :key="pokemon.id">
           {{ pokemon.id }} - {{ pokemon.name }}
