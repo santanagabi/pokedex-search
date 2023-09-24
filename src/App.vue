@@ -1,26 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <input placeholder="Buscar nome do Pokemon" @input="filterPokemons"/>
+    <button>Buscar Nome</button>
+
+    <div>
+      <!-- <img src="" />
+
+      <div>
+        <p>Nome:</p>
+        <p>Tipo:</p>
+        <p>Experiência:</p>
+      </div> -->
+
+      <ul>
+        <li v-for="pokemon in getPokemons" :key="pokemon.id">
+          {{ pokemon.id }} - {{ pokemon.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+
+  data() {
+    return {
+      pokemons: [],
+    };
+  },
+
+  mounted() {
+    this.fetchPokemons();
+  },
+
+  computed: {
+    ...mapGetters(['getPokemons'])
+  },
+
+  methods: {
+    ...mapActions(['fetchPokemons']),
+
+    filterPokemons() {
+      console.log('filtrando pokemons');
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
