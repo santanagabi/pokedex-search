@@ -1,10 +1,12 @@
 <template>
   <div>
     <input
-      placeholder="Buscar nome do Pokemon"
-      v-model="searchedPokemon"
+    placeholder="Buscar nome do Pokemon"
+    v-model="searchedPokemon"
     />
     <button>Buscar Nome</button>
+    
+    <h2 >Pokemons visíveis: {{ this.getVisiblePokemons }}</h2>
 
     <div>
       <ul>
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "App",
@@ -35,17 +37,27 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["getPokemons"]),
+    ...mapGetters(["getPokemons", "getVisiblePokemons"]),
 
     filteredPokemons() {
-      return this.getPokemons.filter((pokemon) => 
+     const filteredData =  this.getPokemons.filter((pokemon) => 
         pokemon.name.toLowerCase().includes(this.searchedPokemon.toLowerCase())
       )
+
+      this.SET_FILTERED_POKEMONS(filteredData)
+      return filteredData
+    },
+
+    counterPokemon() {
+      const visiblePokemon = this.filteredPokemons.length
+      this.SET_VISIBLE_POKEMONS(visiblePokemon)
+      return visiblePokemon
     }
   },
 
   methods: {
     ...mapActions(["fetchPokemons"]),
+    ...mapMutations(["SET_FILTERED_POKEMONS", "SET_VISIBLE_POKEMONS"])
   },
 };
 </script>

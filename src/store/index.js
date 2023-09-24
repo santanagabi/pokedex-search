@@ -4,6 +4,8 @@ export default createStore({
   state: {
     //  Definir o estado inicial aqui / dado inicial do pokemon
     pokemons: [],
+    pokemonsFiltered: [],
+    visiblePokemon: 50
   },
 
   mutations: {
@@ -11,6 +13,14 @@ export default createStore({
     SET_POKEMONS(state, data) {
       state.pokemons = data;
     },
+
+    SET_FILTERED_POKEMONS(state, data) {
+      state.pokemonsFiltered = data
+    },
+
+    SET_VISIBLE_POKEMONS(state, data) {
+      state.visiblePokemon = data
+    }
   },
 
   actions: {
@@ -40,6 +50,10 @@ export default createStore({
     // Vai acessar o dado dos pokemons
     getPokemons(state) {
       return state.pokemons
+    },
+
+    getVisiblePokemons(state) {
+      return state.visiblePokemon
     }
   },
 });
