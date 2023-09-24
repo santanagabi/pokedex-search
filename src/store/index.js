@@ -23,9 +23,10 @@ export default createStore({
         const data = await response.json();
 
         //  Mapeando os dados
-        const mappedPokemons = data.results.map((result, index) => ({
+        const mappedPokemons = data.results.map((data, index) => ({
           id: index + 1,
-          name: result.name,
+          name: data.name,
+          srcImg: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`
         }));
 
         commit("SET_POKEMONS", mappedPokemons);

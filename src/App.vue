@@ -15,6 +15,7 @@
       <ul>
         <li v-for="pokemon in getPokemons" :key="pokemon.id">
           {{ pokemon.id }} - {{ pokemon.name }}
+          <img :src="pokemon.srcImg" alt="Imagem do Pokémon"/>
         </li>
       </ul>
     </div>
