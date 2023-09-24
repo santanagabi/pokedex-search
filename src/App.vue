@@ -1,13 +1,25 @@
 <template>
   <div>
-    <input placeholder="Buscar nome do Pokemon" @input="filterPokemons"/>
+    <input
+      placeholder="Buscar nome do Pokemon"
+      v-model="searchedPokemon"
+      v-on:keyup="searchForPokemon"
+    />
     <button>Buscar Nome</button>
 
     <div>
+      <!-- <img src="" />
+
+      <div>
+        <p>Nome:</p>
+        <p>Tipo:</p>
+        <p>Experiência:</p>
+      </div> -->
+
       <ul>
         <li v-for="pokemon in getPokemons" :key="pokemon.id">
           {{ pokemon.id }} - {{ pokemon.name }}
-          <img :src="pokemon.srcImg" alt="Imagem do Pokémon"/>
+          <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
         </li>
       </ul>
     </div>
@@ -15,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -31,16 +43,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getPokemons'])
+    ...mapGetters(["getPokemons"]),
   },
 
   methods: {
-    ...mapActions(['fetchPokemons']),
+    ...mapActions(["fetchPokemons"]),
 
-    filterPokemons() {
-      console.log('filtrando pokemons');
-    }
-  }
+    searchForPokemon() {
+      console.log("filtrando pokemons");
+    },
+  },
 };
 </script>
 
