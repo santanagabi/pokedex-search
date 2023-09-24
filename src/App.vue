@@ -3,21 +3,12 @@
     <input
       placeholder="Buscar nome do Pokemon"
       v-model="searchedPokemon"
-      v-on:keyup="searchForPokemon"
     />
     <button>Buscar Nome</button>
 
     <div>
-      <!-- <img src="" />
-
-      <div>
-        <p>Nome:</p>
-        <p>Tipo:</p>
-        <p>Experiência:</p>
-      </div> -->
-
       <ul>
-        <li v-for="pokemon in getPokemons" :key="pokemon.id">
+        <li v-for="pokemon in filteredPokemons" :key="pokemon.id">
           {{ pokemon.id }} - {{ pokemon.name }}
           <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
         </li>
@@ -34,7 +25,8 @@ export default {
 
   data() {
     return {
-      pokemons: [],
+      // Guarda o valor no input
+      searchedPokemon: ""
     };
   },
 
@@ -44,14 +36,16 @@ export default {
 
   computed: {
     ...mapGetters(["getPokemons"]),
+
+    filteredPokemons() {
+      return this.getPokemons.filter((pokemon) => 
+        pokemon.name.toLowerCase().includes(this.searchedPokemon.toLowerCase())
+      )
+    }
   },
 
   methods: {
     ...mapActions(["fetchPokemons"]),
-
-    searchForPokemon() {
-      console.log("filtrando pokemons");
-    },
   },
 };
 </script>
