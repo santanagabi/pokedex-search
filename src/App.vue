@@ -6,19 +6,14 @@
     <h2>Pokemons visíveis: {{ this.getVisiblePokemons }}</h2>
 
     <div>
-      <!-- TODO componentizar o PokemonList -->
-      <ul>
-        <li v-for="pokemon in filteredPokemons" :key="pokemon.id">
-          {{ pokemon.id }} - {{ pokemon.name }}
-          <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
-        </li>
-      </ul>
+      <PokemonList :pokemons="filteredPokemons"/>
     </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import PokemonList from "./components/PokemonList.vue";
 
 export default {
   name: "App",
@@ -28,6 +23,10 @@ export default {
       // Guarda o valor no input
       searchedPokemon: "",
     };
+  },
+
+  components: {
+    PokemonList,
   },
 
   mounted() {
