@@ -7,7 +7,12 @@
     </h2>
 
     <div>
-      <PokemonList :pokemons="filteredPokemons" />
+      <PokemonList :pokemons="visiblePokemons" />
+    </div>
+
+    <div>
+      <button @click="showMorePokemons">Mostrar Mais</button>
+      <button @click="showLessPokemons">Mostrar Menos</button>
     </div>
   </div>
 </template>
@@ -38,22 +43,36 @@ export default {
   computed: {
     ...mapGetters(["getPokemons", "getVisiblePokemons"]),
 
-    filteredPokemons() {
+    visiblePokemons() {
       const filteredData = this.getPokemons.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(this.filteredSearch.toLowerCase())
       );
 
-      this.SET_FILTERED_POKEMONS(filteredData);
-      return filteredData;
+      // slice() ===> lista a partir do indice 0, this.getVisiblePokemons retorna o número com o indice de até qual
+      // iremos pegar
+      // slice irá retornar uma nova lista, sem modificar a lista original
+      return filteredData.slice(0, this.getVisiblePokemons); // slice () -> irá limitar o número de pokemons visiveis
     },
   },
 
   methods: {
     ...mapActions(["fetchPokemons"]),
-    ...mapMutations(["SET_FILTERED_POKEMONS", "SET_VISIBLE_POKEMONS"]),
+    ...mapMutations(["SET_VISIBLE_POKEMONS", "SET_VISIBLE_POKEMONS"]),
 
     handleSearchInputChange(value) {
       this.filteredSearch = value;
+    },
+
+    showMorePokemons() {
+      const newVisiblePokemon = this.getVisiblePokemons + 10;
+      this.SET_VISIBLE_POKEMONS(newVisiblePokemon);
+    },
+
+    showLessPokemons() {
+      const newVisiblePokemon = this.getVisiblePokemons - 10;
+      if (newVisiblePokemon >= 10) {
+        this.SET_VISIBLE_POKEMONS(newVisiblePokemon);
+      }
     },
   },
 };
@@ -62,7 +81,7 @@ export default {
 <style>
 .pokemon-counter {
   background: #c62828;
-  color: white; 
+  color: white;
   font-size: 24px;
   padding: 10px;
   border-radius: 5px;
@@ -75,4 +94,3 @@ export default {
   margin-left: 5px;
 }
 </style>
-

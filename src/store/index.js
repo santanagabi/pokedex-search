@@ -5,7 +5,7 @@ export default createStore({
     //  Definir o estado inicial aqui / dado inicial do pokemon
     pokemons: [],
     pokemonsFiltered: [],
-    visiblePokemon: 50,
+    visiblePokemon: 10, // valor inicial dos pokemons que serão exibidos
   },
 
   mutations: {
@@ -14,13 +14,9 @@ export default createStore({
       state.pokemons = data;
     },
 
-    SET_FILTERED_POKEMONS(state, data) {
-      state.pokemonsFiltered = data
-    },
-
     SET_VISIBLE_POKEMONS(state, data) {
-      state.visiblePokemon = data
-    }
+      state.visiblePokemon = data;
+    },
   },
 
   actions: {
@@ -28,7 +24,9 @@ export default createStore({
     // actions podem ficar responsáveis por chamadas de API, podendo agir de forma assíncrona
     async fetchPokemons({ commit }) {
       try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50");
+        const response = await fetch(
+          "https://pokeapi.co/api/v2/pokemon/?limit=100"
+        );
         // .json() pois irá receber JSON da API e irá retornar em formato de objeto JavaScript
         const data = await response.json();
 
@@ -36,7 +34,9 @@ export default createStore({
         const mappedPokemons = data.results.map((data, index) => ({
           id: index + 1,
           name: data.name,
-          srcImg: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${index + 1}.png`
+          srcImg: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+            index + 1
+          }.png`,
         }));
 
         commit("SET_POKEMONS", mappedPokemons);
@@ -49,11 +49,11 @@ export default createStore({
   getters: {
     // Vai acessar o dado dos pokemons
     getPokemons(state) {
-      return state.pokemons
+      return state.pokemons;
     },
 
     getVisiblePokemons(state) {
-      return state.visiblePokemon
-    }
+      return state.visiblePokemon;
+    },
   },
 });
