@@ -1,10 +1,12 @@
 <template>
   <div>
-    <PokemonSearchInput @input-change="handleSearchInputChange" />
+    <div class="header">
+      <h2 class="pokemon-counter">
+        Pokemons visíveis: {{ this.getVisiblePokemons }}
+      </h2>
 
-    <h2 class="pokemon-counter">
-      Pokemons visíveis: {{ this.getVisiblePokemons }}
-    </h2>
+      <PokemonSearchInput @input-change="handleSearchInputChange" />
+    </div>
 
     <div>
       <PokemonList :pokemons="visiblePokemons" />
@@ -78,15 +80,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .pokemon-counter {
   background: #c62828;
-  color: white;
-  font-size: 24px;
+  color: #333; 
   padding: 10px;
   border-radius: 5px;
-  text-align: center;
   margin-bottom: 20px;
+  font-weight: 900;
+  font-size: 35px;
 }
 
 .pokemon-counter span {
