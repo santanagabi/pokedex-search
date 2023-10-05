@@ -5,7 +5,7 @@ export default createStore({
     //  Definir o estado inicial aqui / dado inicial do pokemon
     pokemons: [],
     pokemonsFiltered: [],
-    visiblePokemon: 50
+    visiblePokemon: 50,
   },
 
   mutations: {
