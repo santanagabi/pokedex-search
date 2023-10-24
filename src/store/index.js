@@ -17,6 +17,15 @@ export default createStore({
     SET_VISIBLE_POKEMONS(state, data) {
       state.visiblePokemon = data;
     },
+
+    DELETE_POKEMON(state, id) {
+      //  se o id que esta sendo apresentado for igual ao id passado de argumento --> true
+      const index = state.pokemons.findIndex((pokemon) => pokemon.id === id);
+
+      if (index !== -1) {
+        state.pokemons.splice(index, 1);
+      }
+    },
   },
 
   actions: {
@@ -43,6 +52,11 @@ export default createStore({
       } catch (error) {
         console.log("Erro", error);
       }
+    },
+
+    deletePokemon({ commit }, id) {
+      //  o commit é uma função que permite chamar a mutation
+      commit("DELETE_POKEMON", id);
     },
   },
 

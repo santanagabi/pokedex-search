@@ -3,11 +3,14 @@
     <li v-for="pokemon in pokemons" :key="pokemon.id" class="pokemon-list-item">
       {{ pokemon.id }} - {{ pokemon.name }}
       <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
+      <button @click="deletedPokemon(pokemon.id)">Excluir</button>
     </li>
   </ul>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "PokemonList",
 
@@ -15,6 +18,17 @@ export default {
     pokemons: {
       type: Array,
       default: () => [],
+    },
+  },
+
+  methods: {
+    ...mapActions(["deletePokemon"]),
+
+    deletedPokemon(id) {
+      // chamar uma ação no Vuex
+      this.deletePokemon(id);
+
+      console.log(id);
     },
   },
 };
