@@ -6,8 +6,10 @@
       </h2>
 
       <PokemonSearchInput @input-change="handleSearchInputChange" />
+    </div>
 
-      <button @click="resetApp">Reiniciar</button>
+    <div>
+      <button @click="resetApp" class="reset-button">Reiniciar</button>
     </div>
 
     <div>
@@ -107,5 +109,21 @@ export default {
 .pokemon-counter span {
   font-weight: bold;
   margin-left: 5px;
+}
+
+.reset-button {
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.reset-button:hover {
+  background-color: #1565c0;
 }
 </style>

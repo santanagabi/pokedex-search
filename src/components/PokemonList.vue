@@ -3,7 +3,8 @@
     <li v-for="pokemon in pokemons" :key="pokemon.id" class="pokemon-list-item">
       {{ pokemon.id }} - {{ pokemon.name }}
       <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
-      <button @click="deletedPokemon(pokemon.id)">Excluir</button>
+
+      <button @click="deletedPokemon(pokemon.id)" class="delete-button">Excluir</button>
     </li>
   </ul>
 </template>
@@ -55,5 +56,21 @@ img {
   max-width: 250px;
   max-height: 250px;
   margin-left: 10px;
+}
+
+.delete-button {
+  background-color: #c62828;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 50%; 
+  transition: background-color 0.3s; 
+}
+
+.delete-button:hover {
+  background-color: #ff3d00; 
 }
 </style>
