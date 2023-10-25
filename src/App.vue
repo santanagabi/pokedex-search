@@ -6,6 +6,8 @@
       </h2>
 
       <PokemonSearchInput @input-change="handleSearchInputChange" />
+
+      <button @click="resetApp">Reiniciar</button>
     </div>
 
     <div>
@@ -61,6 +63,11 @@ export default {
     ...mapActions(["fetchPokemons"]),
     ...mapMutations(["SET_VISIBLE_POKEMONS", "SET_VISIBLE_POKEMONS"]),
 
+    resetApp() {
+      // chama uma ação que busca os dados da API e retorna o estado inicial
+      this.fetchPokemons();
+    },
+
     handleSearchInputChange(value) {
       this.filteredSearch = value;
     },
@@ -89,7 +96,7 @@ export default {
 
 .pokemon-counter {
   background: #c62828;
-  color: #333; 
+  color: #333;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;

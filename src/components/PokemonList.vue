@@ -27,8 +27,6 @@ export default {
     deletedPokemon(id) {
       // chamar uma ação no Vuex
       this.deletePokemon(id);
-
-      console.log(id);
     },
   },
 };

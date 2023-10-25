@@ -33,6 +33,7 @@ export default createStore({
     // actions podem ficar responsáveis por chamadas de API, podendo agir de forma assíncrona
     async fetchPokemons({ commit }) {
       try {
+        // fetch = retorna uma promise
         const response = await fetch(
           "https://pokeapi.co/api/v2/pokemon/?limit=100"
         );
