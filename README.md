@@ -1,5 +1,9 @@
 # Pokedex Search
 
+<div align="center">
+  <img src="https://github.com/santanagabi/pokedex-search/assets/95951195/ca88d08f-9d3e-46da-bde8-e0bc6534d6c3" alt="CharmanderCharmanderPokemonGIF">
+</div>
+
 Pokedex Search is a Vue.js project aimed at helping you learn Vuex by implementing various features. Below is a brief overview of what this project does and how it demonstrates the capabilities of Vuex.
 
 ## Project Features
