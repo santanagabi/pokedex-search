@@ -1,12 +1,15 @@
 <template>
-  <ul>
-    <li v-for="pokemon in pokemons" :key="pokemon.id" class="pokemon-list-item">
-      {{ pokemon.id }} - {{ pokemon.name }}
-      <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
-
+  <div class="pokemon-list">
+    <div v-for="pokemon in pokemons" :key="pokemon.id" class="pokemon-list-item">
+      <div class="pokemon-info">
+        <div class="pokemon-header">
+          {{ pokemon.id }} - {{ pokemon.name }}
+        </div>
+        <img :src="pokemon.srcImg" alt="Imagem do Pokémon" />
+      </div>
       <button @click="deletedPokemon(pokemon.id)" class="delete-button">Excluir</button>
-    </li>
-  </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -26,7 +29,6 @@ export default {
     ...mapActions(["deletePokemon"]),
 
     deletedPokemon(id) {
-      // chamar uma ação no Vuex
       this.deletePokemon(id);
     },
   },
@@ -34,17 +36,19 @@ export default {
 </script>
 
 <style>
-ul {
-  list-style: none;
-  padding: 0;
+.pokemon-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permite que os cards quebrem para a próxima linha se não houver espaço suficiente */
+  gap: 20px; /* Espaçamento entre os cards */
 }
 
 .pokemon-list-item {
-  margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  max-width: 300px; /* Largura máxima de cada card */
 }
 
 .pokemon-list-item:hover {
@@ -52,10 +56,26 @@ ul {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
+.pokemon-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-header {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
 img {
   max-width: 250px;
   max-height: 250px;
-  margin-left: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
 }
 
 .delete-button {
@@ -66,11 +86,10 @@ img {
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  margin-left: 50%; 
-  transition: background-color 0.3s; 
+  transition: background-color 0.3s;
 }
 
 .delete-button:hover {
-  background-color: #ff3d00; 
+  background-color: #ff3d00;
 }
 </style>

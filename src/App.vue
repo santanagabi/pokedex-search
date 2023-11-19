@@ -2,23 +2,22 @@
   <div>
     <div class="header">
       <h2 class="pokemon-counter">
-        Pokemons visíveis: {{ this.getVisiblePokemons }}
+        🌟 Pokemons visíveis: {{ this.getVisiblePokemons }} 🌟
       </h2>
 
-      <PokemonSearchInput @input-change="handleSearchInputChange" />
+      <div class="search-reset-container">
+        <PokemonSearchInput @input-change="handleSearchInputChange" />
+        <button @click="resetApp" class="reset-button">Reiniciar</button>
+      </div>
     </div>
 
-    <div>
-      <button @click="resetApp" class="reset-button">Reiniciar</button>
-    </div>
-
-    <div>
+    <div class="pokemon-list-container">
       <PokemonList :pokemons="visiblePokemons" />
     </div>
 
-    <div>
-      <button @click="showMorePokemons">Mostrar Mais</button>
-      <button @click="showLessPokemons">Mostrar Menos</button>
+    <div class="show-more-less-buttons">
+      <button @click="showMorePokemons" class="action-button">Mostrar Mais</button>
+      <button @click="showLessPokemons" class="action-button">Mostrar Menos</button>
     </div>
   </div>
 </template>
@@ -54,19 +53,15 @@ export default {
         pokemon.name.toLowerCase().includes(this.filteredSearch.toLowerCase())
       );
 
-      // slice() ===> lista a partir do indice 0, this.getVisiblePokemons retorna o número com o indice de até qual
-      // iremos pegar
-      // slice irá retornar uma nova lista, sem modificar a lista original
-      return filteredData.slice(0, this.getVisiblePokemons); // slice () -> irá limitar o número de pokemons visiveis
+      return filteredData.slice(0, this.getVisiblePokemons);
     },
   },
 
   methods: {
     ...mapActions(["fetchPokemons"]),
-    ...mapMutations(["SET_VISIBLE_POKEMONS", "SET_VISIBLE_POKEMONS"]),
+    ...mapMutations(["SET_VISIBLE_POKEMONS"]),
 
     resetApp() {
-      // chama uma ação que busca os dados da API e retorna o estado inicial
       this.fetchPokemons();
     },
 
@@ -98,17 +93,20 @@ export default {
 
 .pokemon-counter {
   background: #c62828;
-  color: #333;
+  color: white;
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 20px;
   font-weight: 900;
-  font-size: 35px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
 }
 
-.pokemon-counter span {
-  font-weight: bold;
-  margin-left: 5px;
+.search-reset-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .reset-button {
@@ -119,11 +117,36 @@ export default {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
-  align-self: center;
+  margin-left: 15px;
 }
 
 .reset-button:hover {
   background-color: #1565c0;
+}
+
+.pokemon-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.show-more-less-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.action-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.action-button:hover {
+  background-color: #45a049;
 }
 </style>
